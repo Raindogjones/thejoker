@@ -31,9 +31,9 @@ __all__ = [
     "phase_coverage_per_period",
 ]
 
-    # SB2:
-    from .thejoker_sb2 import *
-    from .prior_sb2 import JokerSB2Prior
+# SB2:
+from .thejoker_sb2 import *
+from .prior_sb2 import JokerSB2Prior
 
 
 __bibtex__ = __citation__ = """@ARTICLE{thejoker,
