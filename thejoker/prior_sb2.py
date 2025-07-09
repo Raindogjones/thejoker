@@ -187,8 +187,16 @@ class JokerSB2Prior(JokerPrior):
                              **kwargs)
             for name in par_names:
                 p = sub_pars[name]
-                unit = getattr(p, xu.UNIT_ATTR_NAME, u.one)
-
+                #unit = getattr(p, xu.UNIT_ATTR_NAME, u.one)
+                if p.name == "P" and not hasattr(p, xu.UNIT_ATTR_NAME):
+                    unit = u.day
+                elif p.name in {"omega", "M0"} and not hasattr(p, xu.UNIT_ATTR_NAME):
+                    unit = u.rad
+                elif p.name == "e" and not hasattr(p, xu.UNIT_ATTR_NAME):
+                    unit = u.one 
+                elif p.name == "s" and not hasattr(p, xu.UNIT_ATTR_NAME):
+                    unit = u.m/u.s
+                    
                 if (p.name == 'K1' and k == 0) or (p.name == 'K2' and k == 1):
                     name = 'K'
 
