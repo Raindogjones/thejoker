@@ -254,7 +254,7 @@ def default_linear_prior_sb2(sigma_K0_1=None, P0_1=None,
         This is either required, or this function must be called within a pymc3
         model context.
     """
-    import pymc3 as pm
+    import pymc as pm
     import exoplanet.units as xu
     from .distributions import FixedCompanionMass
 
