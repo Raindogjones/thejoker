@@ -678,7 +678,7 @@ cdef class CJokerSB2Helper(CJokerHelper):
         self.fixed_K_prior = 0
 
         for i, name in enumerate(prior._linear_equiv_units.keys()):
-            dist = prior.model[name].distribution
+            dist = prior.model[name].owner.op  #.distribution
             _unit = getattr(prior.model[name], xu.UNIT_ATTR_NAME)
             to_unit = self.internal_units[name]
             mu = (dist.mean.eval() * _unit).to_value(to_unit)

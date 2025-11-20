@@ -187,8 +187,16 @@ class JokerSB2Prior(JokerPrior):
                              **kwargs)
             for name in par_names:
                 p = sub_pars[name]
-                unit = getattr(p, xu.UNIT_ATTR_NAME, u.one)
-
+                #unit = getattr(p, xu.UNIT_ATTR_NAME, u.one)
+                if p.name == "P" and not hasattr(p, xu.UNIT_ATTR_NAME):
+                    unit = u.day
+                elif p.name in {"omega", "M0"} and not hasattr(p, xu.UNIT_ATTR_NAME):
+                    unit = u.rad
+                elif p.name == "e" and not hasattr(p, xu.UNIT_ATTR_NAME):
+                    unit = u.one 
+                elif p.name == "s" and not hasattr(p, xu.UNIT_ATTR_NAME):
+                    unit = u.m/u.s
+                    
                 if (p.name == 'K1' and k == 0) or (p.name == 'K2' and k == 1):
                     name = 'K'
 
@@ -246,7 +254,7 @@ def default_linear_prior_sb2(sigma_K0_1=None, P0_1=None,
         This is either required, or this function must be called within a pymc3
         model context.
     """
-    import pymc3 as pm
+    import pymc as pm
     import exoplanet.units as xu
     from .distributions import FixedCompanionMass
 
